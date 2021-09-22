@@ -1,5 +1,6 @@
 <h1>Showing Article Details</h1>
 
+<h4>By: <i><%= @article.user.username if @article.user %></i></h4>
 <h2>Title: <%= @article.title %></h2>
 <p><strong>Description: <%= @article.description %> </strong></p>
 
