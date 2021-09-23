@@ -1,0 +1,10 @@
+<h1> <%= @user.username %> Profile</h1>
+
+<%= gravatar_for @user, size: 200 %> 
+
+
+<h2> Articles </h2>
+
+<%= render "articles/articles" %>
+
+<%= link_to 'Return to Articles', articles_path %>
