@@ -1,7 +1,7 @@
 <h1>Create a New Category</h1>
 
 <% if @category.errors.any? %>
-  <h2> The following erros prevented the <%= @category.class.name.downcase %> from beign saved </h2>
+  <h2> The following errors prevented the <%= @category.class.name.downcase %> from beign saved </h2>
   <ul>
     <% @category.errors.full_messages.each do |msg| %>
       <li> <%= msg %> </li>

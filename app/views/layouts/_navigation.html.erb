@@ -5,9 +5,19 @@
 <div class="dropdown"> 
   <button class="dropbtn">Articles</button> 
   <div class="dropdown-content">
-    <%= link_to 'Articles listing', articles_path %> 
+    <%= link_to 'Articles Listing', articles_path %> 
     <% if logeed_in? %>
       <%= link_to 'New article', new_article_path %> 
+    <% end %>
+  </div>
+</div>
+
+<div class="dropdown"> 
+  <button class="dropbtn">Categories</button> 
+  <div class="dropdown-content">
+    <%= link_to 'Categories Listing', categories_path %> 
+    <% if logeed_in? && current_user.admin? %>
+      <%= link_to 'New Category', new_category_path %> 
     <% end %>
   </div>
 </div>
