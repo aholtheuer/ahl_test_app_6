@@ -1,14 +1,1 @@
 <h1>Home</h1>
-
-<%= link_to 'Articles listing', articles_path %> |
-<%= link_to 'About page', about_path %> 
-<%= link_to 'Users', users_path %> 
-
-
-<% if logeed_in? %>
-  <%= link_to current_user.username, user_path(current_user) %> 
-  <%= link_to 'LogOut', logout_path, method: :delete %>   
-<% else %>
-  <%= link_to 'LogIn', login_path %> 
-  <%= link_to 'Signup', signup_path %> 
-<% end %>

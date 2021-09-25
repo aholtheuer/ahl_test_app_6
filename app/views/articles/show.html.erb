@@ -3,7 +3,8 @@
 <h4>By: <i><%= link_to @article.user.username, user_path(@article.user.id)%></i></h4>
 <h2>Title: <%= @article.title %></h2>
 <p><strong>Description: <%= @article.description %> </strong></p>
-
-<%= link_to 'Edit', edit_article_path(@article.id) %> |
-<%= link_to 'Delete', article_path(@article.id), method: :delete, data: { confirm: "Are you sure?"} %> |
-<%= link_to 'Return to Articles', articles_path %>
+<% if logeed_in? && ( @article.user == current_user || current_user.admin? ) %>
+  <%= link_to 'Edit', edit_article_path(@article.id) %> |
+  <%= link_to 'Delete', article_path(@article.id), method: :delete, data: { confirm: "Are you sure?"} %> |
+<% end %>
+  <%= link_to 'Return to Articles', articles_path %>

@@ -1,11 +1,29 @@
+<br>
+<br>
 <%= link_to 'Home page', logeed_in? ? articles_path : root_path %> 
-<%= link_to 'Articles listing', articles_path %> |
+
+<div class="dropdown"> 
+  <button class="dropbtn">Articles</button> 
+  <div class="dropdown-content">
+    <%= link_to 'Articles listing', articles_path %> 
+    <% if logeed_in? %>
+      <%= link_to 'New article', new_article_path %> 
+    <% end %>
+  </div>
+</div>
+
 <%= link_to 'Users', users_path %> 
 
-
 <% if logeed_in? %>
-  <%= link_to current_user.username, user_path(current_user) %> 
-  <%= link_to 'LogOut', logout_path, method: :delete %>   
+  <div class="dropdown"> 
+    <button class="dropbtn"> <%= current_user.admin? ? "(Admin)" : "" %> Profile [<%=current_user.username%>]</button> 
+      <div class="dropdown-content">
+        <%= link_to 'View your Profile', user_path(current_user) %> 
+        <%= link_to 'Edit Your Profile', edit_user_path(current_user) %>
+        <%= link_to 'Delete Your Profile', user_path(current_user), method: :delete, data: {confirm: "Are you sure?" }%>
+      </div>
+  </div>
+  <%= link_to 'Log Out', logout_path, method: :delete %>   
 <% else %>
   <%= link_to 'LogIn', login_path %> 
   <%= link_to 'Signup', signup_path %> 
