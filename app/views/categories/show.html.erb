@@ -1,2 +1,11 @@
 <h1> <%= @category.name %> Category</h1>
 
+<% if logeed_in? && current_user.admin? %>
+  <%= link_to "Edit Category Name", edit_category_path(@category)%> |
+<% end %>
+<%= link_to 'Return to Articles', articles_path %>
+
+<h2> Articles </h2>
+<%= will_paginate @articles %>
+<%= render "articles/articles" %>
+

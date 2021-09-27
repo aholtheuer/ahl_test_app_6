@@ -1,4 +1,4 @@
-<h1>Create a New Category</h1>
+<h1>Update Category: <%= @category.name %></h1>
 
 <% if @category.errors.any? %>
   <h2> The following errors prevented the <%= @category.class.name.downcase %> from beign saved </h2>
@@ -20,4 +20,4 @@
   </p>
 <% end %>
 
-<%= link_to '[ Cancel and return to Categories ]', categories_path %>
+<%= link_to '[ Cancel and eturn to category ]', category_path(@category)  %>
