@@ -10,8 +10,8 @@ on:
     branches: [ main ]
   pull_request:
 jobs:
-  run-lint:
-    name:    Run 
+  linters:
+    name: Linters
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,13 +21,33 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      # Add or Replace any other security checks here
-      #- name: Run security checks
-      #  run: |
-      #    bin/bundler-audit --update
-      #    bin/brakeman -q -w2
-      
-      # Add or Replace any other Linters here
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.13.0
+      - name: Find yarn cache location
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: JS package cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+
       - name: Run linters
         run: |
           bin/rubocop --parallel
+        # bin/stylelint
+        # bin/prettier
+        # bin/eslint
+      - name: Run security checks
+        run: |
+          bin/bundler-audit --update
+          bin/brakeman -q -w2
+
